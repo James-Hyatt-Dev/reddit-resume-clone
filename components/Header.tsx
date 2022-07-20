@@ -18,12 +18,14 @@ import {
     PlusIcon,
     SparklesIcon,
 } from '@heroicons/react/outline'
-import { signIn } from 'next-auth/react'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 
 
 
 function Header() {
+    const {data: session} = useSession();
+
   return (
 
     <div className='flex bg-white px-4 py-2 shadow-sm sticky top-0 z-50'>
@@ -61,14 +63,28 @@ function Header() {
             <MenuIcon className='icon' />
         </div>
 {/* Sign in / Sign out button */}
-        <div onClick={() => signIn()} className="hidden lg:flex items-center space-x-2 border border-gray-100 p-2 cursor-pointer">
+        {session ? (
+            <div onClick={() => signOut()} className="hidden lg:flex items-center space-x-2 border border-gray-100 p-2 cursor-pointer">
             <div className="relative h-5 w-5 flex-shrink-0">
                 <Image src={RedditLogoGuy} layout='fill' objectFit='contain'/>
             </div>
             <div>
-                <p className='text-gray-400'>Sign In</p>
+                <p className='text-gray-400'>Sign Out</p>
             </div>
         </div>
+        ) : (
+            <div onClick={() => signIn()} className="hidden lg:flex items-center space-x-2 border border-gray-100 p-2 cursor-pointer">
+                <div className="relative h-5 w-5 flex-shrink-0">
+                    <Image src={RedditLogoGuy} layout='fill' objectFit='contain'/>
+                </div>
+                <div>
+                    <p className='text-gray-400'>Sign In</p>
+                </div>
+            </div>
+        )}
+        
+
+        
 
     </div>
   )
