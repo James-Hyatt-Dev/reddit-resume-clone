@@ -52,7 +52,7 @@ function Postbox() {
                 <div className='flex items-center px-2'>
                     <p className='min-w-[90px]'>Body:</p>
                     <input className='m-2 flex-1 bg-blue-50 p-2 outline-none' 
-                        {...register('postBody')} 
+                        {...register('postBody', {required: true})} 
                         type='text' 
                         placeholder='text (optional)' 
                     />
@@ -61,7 +61,7 @@ function Postbox() {
                 <div className='flex items-center px-2'>
                     <p className='min-w-[90px]'>Subreddit:</p>
                     <input className='m-2 flex-1 bg-blue-50 p-2 outline-none' 
-                        {...register('subreddit')} 
+                        {...register('subreddit', {required: true})} 
                         type='text' 
                         placeholder='i.e. nextjs' 
                     />
@@ -78,6 +78,22 @@ function Postbox() {
                     </div>
                 )}
 
+                {/* Errors */}
+                {Object.keys(errors).length > 0 && (
+                    <div>
+                        {errors.postTitle?.type === 'required' && (
+                            <p>- A Post Title is required</p>
+                        )}
+
+                        {errors.subreddit?.type === 'required' && (
+                            <p>- A Subreddit is required</p>
+                        )}
+
+                        {errors.postBody?.type === 'required' && (
+                            <p>- Body Text is required</p>
+                        )}
+                    </div>
+                )}
             </div>
         ) }
     </form>
