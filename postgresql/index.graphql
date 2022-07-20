@@ -107,6 +107,23 @@ type Query {
       table: "subreddit"
       configuration: "postgresql_config"
     )
+
+  # custom hook
+
+  getSubredditListByTopic(topic: String!): [Subreddit]
+    @dbquery(
+      type: "postgresql"
+      schema: "public"
+      query: """
+      SELECT *
+      FROM "subreddit"
+      WHERE "topic" = $1
+      """
+      configuration: "postgresql_config"
+    )
+
+  # End custom hook
+
   getSubreddit(id: ID!): Subreddit
     @dbquery(
       type: "postgresql"
@@ -165,10 +182,10 @@ type Mutation {
       dml: DELETE
       configuration: "postgresql_config"
     )
+
   insertPost(
     image: String!
     body: String!
-    created_at: DateTime!
     subreddit_id: ID!
     title: String!
     username: String!
@@ -180,6 +197,7 @@ type Mutation {
       dml: INSERT
       configuration: "postgresql_config"
     )
+
   deletePost(id: ID!): Post
     @dbquery(
       type: "postgresql"

@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Avatar from './Avatar'
 import { LinkIcon, PhotographIcon } from '@heroicons/react/outline'
 import { useForm } from 'react-hook-form'
+import { useMutation } from '@apollo/client'
 
 type FormData ={
     postTitle :string
@@ -13,6 +14,8 @@ type FormData ={
 
 function Postbox() {
     const {data: session} = useSession()
+    const [addPost] = useMutation(ADD_POST)
+
     const [imageBoxOpen, setImageBoxOpen] = useState<boolean>(false)
     const {
         register,
@@ -22,8 +25,14 @@ function Postbox() {
         formState: { errors },
     } = useForm<FormData>()
 
+    const onSubmit = handleSubmit(async (formData) => {
+        console.log(formData)
+    })
+
   return (
-    <form className='sticky top-16 z-50 bg-white border rounded-md border-gray-300 p-2' >
+    <form 
+        onSubmit={onSubmit}
+        className='sticky top-16 z-50 bg-white border rounded-md border-gray-300 p-2' >
 
         <div className='flex items-center space-x-3'>
             {/* Avatar */}
@@ -52,7 +61,7 @@ function Postbox() {
                 <div className='flex items-center px-2'>
                     <p className='min-w-[90px]'>Body:</p>
                     <input className='m-2 flex-1 bg-blue-50 p-2 outline-none' 
-                        {...register('postBody', {required: true})} 
+                        {...register('postBody')} 
                         type='text' 
                         placeholder='text (optional)' 
                     />
@@ -80,7 +89,7 @@ function Postbox() {
 
                 {/* Errors */}
                 {Object.keys(errors).length > 0 && (
-                    <div>
+                    <div className='y-2 p-2 text-red-500'>
                         {errors.postTitle?.type === 'required' && (
                             <p>- A Post Title is required</p>
                         )}
@@ -89,11 +98,16 @@ function Postbox() {
                             <p>- A Subreddit is required</p>
                         )}
 
-                        {errors.postBody?.type === 'required' && (
-                            <p>- Body Text is required</p>
-                        )}
                     </div>
                 )}
+
+                {!!watch('postTitle') && 
+                    <button 
+                        type='submit'
+                        className='w-full rounded-full bg-blue-400 p-2 text-white'>
+                        Create Post
+                    </button>
+                }
             </div>
         ) }
     </form>
