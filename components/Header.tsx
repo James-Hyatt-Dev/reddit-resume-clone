@@ -46,7 +46,7 @@ function Header() {
             <button type='submit' hidden />
         </form>
 
-        <div className='flex text-gray-500 space-x-2 items-center hidden lg:inline-flex'>
+        <div className='flex text-gray-500 space-x-2 items-center hidden lg:inline-flex pl-5'>
             <SparklesIcon className='icon' />
             <GlobeIcon className='icon' />
             <VideoCameraIcon className='icon' />
@@ -65,12 +65,15 @@ function Header() {
 {/* Sign in / Sign out button */}
         {session ? (
             <div onClick={() => signOut()} className="hidden lg:flex items-center space-x-2 border border-gray-100 p-2 cursor-pointer">
-            <div className="relative h-5 w-5 flex-shrink-0">
-                <Image src={RedditLogoGuy} layout='fill' objectFit='contain'/>
-            </div>
-            <div>
+                <div className="relative h-5 w-5 flex-shrink-0">
+                    <Image src={RedditLogoGuy} layout='fill' objectFit='contain'/>
+                </div>
+            <div className='flex-1 text-xs'>
+                <p className='truncate'>{session?.user?.name}</p>
                 <p className='text-gray-400'>Sign Out</p>
             </div>
+
+            <ChevronDownIcon className='h-5 flex-shrink-0 text-gray-400'/>
         </div>
         ) : (
             <div onClick={() => signIn()} className="hidden lg:flex items-center space-x-2 border border-gray-100 p-2 cursor-pointer">
