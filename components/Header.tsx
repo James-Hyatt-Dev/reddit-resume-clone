@@ -18,6 +18,10 @@ import {
     PlusIcon,
     SparklesIcon,
 } from '@heroicons/react/outline'
+import { signIn } from 'next-auth/react'
+
+
+
 
 function Header() {
   return (
@@ -56,8 +60,8 @@ function Header() {
         <div className='ml-5 flex items-center lg:hidden'>
             <MenuIcon className='icon' />
         </div>
-
-        <div className="hidden lg:flex items-center space-x-2 border border-gray-100 p-2 cursor-pointer">
+{/* Sign in / Sign out button */}
+        <div onClick={() => signIn()} className="hidden lg:flex items-center space-x-2 border border-gray-100 p-2 cursor-pointer">
             <div className="relative h-5 w-5 flex-shrink-0">
                 <Image src={RedditLogoGuy} layout='fill' objectFit='contain'/>
             </div>
