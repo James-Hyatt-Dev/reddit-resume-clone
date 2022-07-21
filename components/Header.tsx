@@ -31,7 +31,7 @@ function Header() {
     <div className='flex bg-white px-4 py-2 shadow-sm sticky top-0 z-50'>
 
         <div className='relative h-10 w-20 flex-shrink-0 cursor-pointer'>
-            <Image src={RedditLogo} layout='fill' objectFit='contain' />
+            <Image src={RedditLogo} layout='fill' objectFit='contain' priority/>
         </div>
 
         <div className='flex items-center mx-7 xl:min-w-[300px]' >
