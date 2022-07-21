@@ -19,7 +19,7 @@ import {
     SparklesIcon,
 } from '@heroicons/react/outline'
 import { signIn, signOut, useSession } from 'next-auth/react'
-
+import Link from 'next/link'
 
 
 
@@ -28,10 +28,12 @@ function Header() {
 
   return (
 
-    <div className='flex bg-white px-4 py-2 shadow-sm sticky top-0 z-50'>
+    <div className='flex bg-white px-4 py-2 shadow-sm sticky top-0 z-50 items-center'>
 
         <div className='relative h-10 w-20 flex-shrink-0 cursor-pointer'>
-            <Image src={RedditLogo} layout='fill' objectFit='contain' priority/>
+            <Link href='/'>
+                <Image src={RedditLogo} layout='fill' objectFit='contain' priority/>
+            </Link>
         </div>
 
         <div className='flex items-center mx-7 xl:min-w-[300px]' >

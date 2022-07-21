@@ -16,9 +16,9 @@ type FormData ={
     subreddit: string
 }
 
-type FormData = {
+type Props = {
     subreddit?: string
-}
+  }
 
 function Postbox({ subreddit }: Props) {
     const { data: session } = useSession()
