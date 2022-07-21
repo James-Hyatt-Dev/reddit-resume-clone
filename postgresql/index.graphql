@@ -206,7 +206,7 @@ type Mutation {
       dml: DELETE
       configuration: "postgresql_config"
     )
-  insertSubreddit(created_at: DateTime!, topic: String!): Subreddit
+  insertSubreddit(topic: String!): Subreddit
     @dbquery(
       type: "postgresql"
       schema: "public"
