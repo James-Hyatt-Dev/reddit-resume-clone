@@ -114,7 +114,7 @@ type Query {
       type: "postgresql"
       schema: "public"
       query: """
-      select *, "post".id as id from "post"
+      select * from "post"
       order by "post"."created_at" desc
       """
       configuration: "postgresql_config"
