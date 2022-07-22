@@ -4,12 +4,20 @@ import Avatar from './Avatar'
 import TimeAgo from 'react-timeago'
 import { BookmarkIcon, ChatAltIcon, DotsHorizontalIcon, GiftIcon, ShareIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
+import { Jelly } from '@uiball/loaders'
 
 type Props = {
     post: Post
 }
 
-function Post({post}: Props) {
+function Post({ post }: Props) {
+    if (!post)
+    return (
+      <div
+        className="flex w-full items-center justify-center p-10 text-xl">
+            <Jelly size={50} color="#FF4501" />
+      </div>
+    )
 
     
   return (
@@ -32,6 +40,7 @@ function Post({post}: Props) {
                             r/{post.subreddit[0]?.topic}
                         </span>
                     </Link>
+                    • Posted by u/{post.username} <TimeAgo date={post.created_at} />
                     </p>
                 </div>
                 {/* Body */}
